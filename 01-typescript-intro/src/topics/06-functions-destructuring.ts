@@ -1,5 +1,5 @@
 
-interface Product{
+export interface Product{
     description: string;
     price: number;
 }
@@ -15,7 +15,7 @@ const tablet: Product = {
     price: 250.0
 }
 
-interface TaxCalculationOptions{
+export interface TaxCalculationOptions{
     tax:number;
     products: Product[];
 }
@@ -23,9 +23,9 @@ interface TaxCalculationOptions{
 
 // function taxCalculation( options: TaxCalculationOptions) : [number, number] {
 // function taxCalculation( {tax, products} : TaxCalculationOptions) : [number, number] { //en esta linea aplico la desestructuracion en los parametros
-function taxCalculation( options : TaxCalculationOptions) : [number, number] {
+export function taxCalculation( options : TaxCalculationOptions) : [number, number] {
     let total = 0;
-    
+
     const { tax, products} = options; //en este caso estoy desestructurando dentro de la funcion
 
     products.forEach( ({ price }) => { // aqui estoy desestructurando price
@@ -47,4 +47,4 @@ const [total, taxResult] = taxCalculation({ //desestructuro el resultado de la f
 console.log('Total', total );
 console.log('Tax', taxResult);
 
-export{};
+// export{};
