@@ -1,34 +1,34 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-heroes-hero',
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.css'
+  styleUrl: './hero.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent {
 
-  public name: string = 'Ironman';
-  public age: number = 45;
+  name = signal('Ironman');
+  age = signal(45);
 
-  get capitalizedName():string{
-    return this.name.toUpperCase();
-  }
+  heroDescription = computed( () =>{
+    const description = `${this.name()} - ${this.age()}`;
+    return description;
+  })
 
-  getHeroDescription():string{
-    return `${ this.name } - ${ this.age } `;
-  }
+  capitalizedName = computed( () => this.name().toUpperCase());
 
   changeHero():void{
-    this.name = 'Spiderman';
+    this.name.set('Spiderman');
   }
 
   changeAge():void{
-    this.age = 25;
+    this.age.set(25);
   }
 
   resetForm():void{
-    this.name = 'Ironman';
-    this.age = 45;
+    this.name.set('Ironman');
+    this.age.set(45);
     // document.querySelectorAll('h1')!.forEach(element => {element.innerHTML = '<h1>Desde Angular</h1>'}) ;
   }
 
